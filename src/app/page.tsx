@@ -1,103 +1,114 @@
-import Image from "next/image";
+"use client";
+import { useState } from 'react';
+import { Vehicle } from "./Vehicle";
+import { Entry } from "./Entry";
+
+// This is the main page of the application
+// It will display a list of vehicles and allow the user to add new vehicles or entries
+// The user can also view details of each vehicle
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [garage, setGarage] = useState<Vehicle[]>([]);
+  const [showAddVehicle, setShowAddVehicle] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Form state for adding a new vehicle
+  const [year, setYear] = useState("");
+  const [make, setMake] = useState("");
+  const [model, setModel] = useState("");
+  const [odometer, setOdometer] = useState("");
+  const [fuel, setFuel] = useState("");
+
+  // Form state for adding an entry
+  const [entryOdometer, setEntryOdometer] = useState("");
+  const [entryFuel, setEntryFuel] = useState("");
+  const [entryDesc, setEntryDesc] = useState("");
+
+  function handleAddVehicle(e: React.FormEvent) {
+    e.preventDefault();
+    const v = new Vehicle(
+      parseInt(year),
+      make,
+      model,
+      parseFloat(odometer),
+      parseFloat(fuel)
+    );
+    setGarage([...garage, v]);
+    setShowAddVehicle(false);
+    setYear(""); setMake(""); setModel(""); setOdometer(""); setFuel("");
+  }
+
+  function handleAddEntry(e: React.FormEvent) {
+    e.preventDefault();
+    if (!selectedVehicle) return;
+    selectedVehicle.addEntry(
+      new Date(),
+      parseFloat(entryOdometer),
+      parseFloat(entryFuel),
+      entryDesc
+    );
+    // Force update by creating a new array reference
+    setGarage([...garage]);
+    setEntryOdometer(""); setEntryFuel(""); setEntryDesc("");
+  }
+  return (
+    <main className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Drive App</h1>
+
+      {/* Add Vehicle Form */}
+      {showAddVehicle ? (
+        <form onSubmit={handleAddVehicle} className="mb-4 space-y-2">
+          <input value={year} onChange={e => setYear(e.target.value)} placeholder="Year" required className="border p-1" />
+          <input value={make} onChange={e => setMake(e.target.value)} placeholder="Make" required className="border p-1" />
+          <input value={model} onChange={e => setModel(e.target.value)} placeholder="Model" required className="border p-1" />
+          <input value={odometer} onChange={e => setOdometer(e.target.value)} placeholder="Odometer" required className="border p-1" />
+          <input value={fuel} onChange={e => setFuel(e.target.value)} placeholder="Fuel Level" required className="border p-1" />
+          <button type="submit" className="bg-blue-500 text-white px-2 py-1">Add Vehicle</button>
+          <button type="button" onClick={() => setShowAddVehicle(false)} className="ml-2">Cancel</button>
+        </form>
+      ) : (
+        <button onClick={() => setShowAddVehicle(true)} className="mb-4 bg-green-500 text-white px-2 py-1">Add Vehicle</button>
+      )}
+
+      {/* Garage List */}
+      <h2 className="text-xl font-semibold mb-2">Garage</h2>
+      {garage.length === 0 ? (
+        <p>No vehicles in garage.</p>
+      ) : (
+        <ul>
+          {garage.map((v, i) => (
+            <li key={i} className="mb-2">
+              <button onClick={() => setSelectedVehicle(v)} className="underline text-blue-600">
+                {v.getVehicleName()}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Vehicle Details and Add Entry */}
+      {selectedVehicle && (
+        <div className="mt-6 border-t pt-4">
+          <h3 className="text-lg font-bold">{selectedVehicle.getVehicleName()}</h3>
+          <p>Odometer: {selectedVehicle.getRecentOdometer()}</p>
+          <p>Fuel Level: {selectedVehicle.getRecentFuelLevel()}</p>
+          <h4 className="font-semibold mt-2">Logbook</h4>
+          <ul>
+            {selectedVehicle.logbook.map((entry: Entry, idx: number) => (
+              <li key={idx}>
+                {entry.display()}
+              </li>
+            ))}
+          </ul>
+          <form onSubmit={handleAddEntry} className="mt-2 space-x-2">
+            <input value={entryOdometer} onChange={e => setEntryOdometer(e.target.value)} placeholder="Odometer" required className="border p-1" />
+            <input value={entryFuel} onChange={e => setEntryFuel(e.target.value)} placeholder="Fuel Level" required className="border p-1" />
+            <input value={entryDesc} onChange={e => setEntryDesc(e.target.value)} placeholder="Description" className="border p-1" />
+            <button type="submit" className="bg-blue-500 text-white px-2 py-1">Add Entry</button>
+            <button type="button" onClick={() => setSelectedVehicle(null)} className="ml-2">Close</button>
+          </form>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+    </main>
   );
 }
