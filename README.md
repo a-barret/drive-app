@@ -1,5 +1,5 @@
-### Introduction
-# Overview
+# Introduction
+## Overview
 I am an aspiring software engineer, exploring the various technologies that lead the industry. My goal is to build my understanding of these softwares so that I can keep up to date with the contsantly changing industry.
 
 This vehicle management Application will allow a user to enter some basic information about their vehicle and then keep a record of the vehicles, fuel consumption and mileage. This provides a foundation to track the efficiency of your vehicle and cost and functionality.
@@ -8,17 +8,17 @@ I wrote this piece of software because I have wanted to have an application I co
 
 [Web Application Demo Video](https://youtu.be/pTDGcUYPVUM)
 
-# Web Pages
+## Web Pages
 
 Since I had created a react web application, I built one webpage. The dynamic part of this page is the displaying of each vehicle in the garage. It will change, depending on what the user enters for their vehicles.
 
-# Development Environment
+## Development Environment
 
 I used next.js to create the app using the create-next-app command. I wrote the typescript in Visual Studio Code.
 
 I used typescript and react framework to build the application.
 
-# Useful Websites
+## Useful Websites
 
 {Make a list of websites that you found helpful in this project}
 * [Creating a React App](https://react.dev/learn/creating-a-react-app)
@@ -26,14 +26,14 @@ I used typescript and react framework to build the application.
 * [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 * [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-# Future Work
+## Future Work
 
 * I need error handling for each of the forms found on the page.
 * Better styling for the page to make it easier to understand.
 * Connecting the data to a database to store the data for if the page is closed.
 * Create a dashboard view of vehicle information.
 
-### Running the App
+# Running the App
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
