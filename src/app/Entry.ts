@@ -14,7 +14,7 @@ export class Entry {
 
     public display(): string {
         // Checks if there is a description with the entry and will return a string with it if there is and without it if there is not
-        if (this.description == null)
+        if (this.description != null && this.description != "")
             return `Date: ${this.date.toLocaleDateString()}, Odometer: ${this.odometer}, Fuel Level: ${this.fuelLevel} gal, Description: ${this.description}`;
 
         return `Date: ${this.date.toLocaleDateString()}, Odometer: ${this.odometer}, Fuel Level: ${this.fuelLevel} gal`;

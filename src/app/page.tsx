@@ -52,7 +52,7 @@ export default function Home() {
     setEntryOdometer(""); setEntryFuel(""); setEntryDesc("");
   }
   return (
-    <main className="p-4">
+    <main className="p-4 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Drive App</h1>
 
       {/* Add Vehicle Form */}
@@ -90,11 +90,11 @@ export default function Home() {
       {selectedVehicle && (
         <div className="mt-6 border-t pt-4">
           <h3 className="text-lg font-bold">{selectedVehicle.getVehicleName()}</h3>
-          <p>Odometer: {selectedVehicle.getRecentOdometer()}</p>
-          <p>Fuel Level: {selectedVehicle.getRecentFuelLevel()}</p>
+          <p>Odometer: {selectedVehicle.getRecentOdometer()} miles</p>
+          <p>Fuel Level: {selectedVehicle.getRecentFuelLevel()} gal</p>
           <h4 className="font-semibold mt-2">Logbook</h4>
           <ul>
-            {selectedVehicle.logbook.map((entry: Entry, idx: number) => (
+            {selectedVehicle.getLogbook().map((entry: Entry, idx: number) => (
               <li key={idx}>
                 {entry.display()}
               </li>

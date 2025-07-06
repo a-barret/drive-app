@@ -1,18 +1,20 @@
 import { Entry } from "./Entry";
 
 export class Vehicle {
+    private static nextId = 1; // Static variable to keep track of the next ID
+    private id: number;
     private year: number;
     private make: string;
     private model: string;
     private logbook: Entry[]
 
     public constructor(year: number, make: string, model: string, currentOdometer: number, currentFuelLevel: number) {
-    // Creates the new vehicle object and creates the first logbook entry
+        this.id = Vehicle.nextId++;
         this.year = year;
         this.make = make;
         this.model = model;
         this.logbook = [];
-        this.addEntry(new Date(), currentOdometer, currentFuelLevel, "First entry")
+        this.addEntry(new Date(), currentOdometer, currentFuelLevel, "First entry");
     }
 
     public display(): string {
@@ -31,9 +33,19 @@ Fuel Level: ${this.getRecentFuelLevel()}
 `
     }
 
+    public getId(): number {
+    // Returns the id of the vehicle
+        return this.id;
+    }
+
     public getVehicleName(): string {
     // Retrieves the vhicle infomation and returns it as a string
         return `${this.year} ${this.make} ${this.model}`;
+    }
+
+    public getLogbook(): Entry[] {
+    // Returns the logbook array
+        return this.logbook;
     }
 
     public getRecentOdometer(): number {
