@@ -6,7 +6,7 @@ This vehicle management Application will allow a user to enter some basic inform
 
 I wrote this piece of software because I have wanted to have an application I could use to track my vehicle usage to make more accurate budget, predictions, and better maintain my own vehicles.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Web Application Demo Video](https://youtu.be/pTDGcUYPVUM)
 
 # Web Pages
 
@@ -21,17 +21,17 @@ I used typescript and react framework to build the application.
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [Creating a React App](https://react.dev/learn/creating-a-react-app)
+* [ReactJS - Creating a React Application](https://www.tutorialspoint.com/reactjs/reactjs_creating_application.htm)
 * [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 * [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+* I need error handling for each of the forms found on the page.
+* Better styling for the page to make it easier to understand.
+* Connecting the data to a database to store the data for if the page is closed.
+* Create a dashboard view of vehicle information.
 
 ### Running the App
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
