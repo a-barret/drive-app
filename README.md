@@ -1,3 +1,39 @@
+### Introduction
+# Overview
+I am an aspiring software engineer, exploring the various technologies that lead the industry. My goal is to build my understanding of these softwares so that I can keep up to date with the contsantly changing industry.
+
+This vehicle management Application will allow a user to enter some basic information about their vehicle and then keep a record of the vehicles, fuel consumption and mileage. This provides a foundation to track the efficiency of your vehicle and cost and functionality.
+
+I wrote this piece of software because I have wanted to have an application I could use to track my vehicle usage to make more accurate budget, predictions, and better maintain my own vehicles.
+
+[Software Demo Video](http://youtube.link.goes.here)
+
+# Web Pages
+
+Since I had created a react web application, I built one webpage. The dynamic part of this page is the displaying of each vehicle in the garage. It will change, depending on what the user enters for their vehicles.
+
+# Development Environment
+
+I used next.js to create the app using the create-next-app command. I wrote the typescript in Visual Studio Code.
+
+I used typescript and react framework to build the application.
+
+# Useful Websites
+
+{Make a list of websites that you found helpful in this project}
+* [Web Site Name](http://url.link.goes.here)
+* [Web Site Name](http://url.link.goes.here)
+* [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+* [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+# Future Work
+
+{Make a list of things that you need to fix, improve, and add in the future.}
+* Item 1
+* Item 2
+* Item 3
+
+### Running the App
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -28,9 +64,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
